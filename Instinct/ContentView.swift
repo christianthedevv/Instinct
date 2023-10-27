@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var gameVm = GameViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        ZStack{
+            if gameVm.gameState == .menu {
+                MenuView()
+            }
+            if gameVm.gameState == .start {
+                GameView()
+            }
+            if gameVm.gameState == .over {
+                GameOverView()
+            }
+        }.environmentObject(gameVm)
     }
 }
 
