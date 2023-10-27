@@ -31,7 +31,7 @@ class GameViewModel: ObservableObject {
             }
         }
     }
-    @Published var gameMode: GameMode = .classic {
+    @Published var gameMode: GameMode = .arcade {
         didSet {
             switch gameMode {
             case .classic:
@@ -48,15 +48,13 @@ class GameViewModel: ObservableObject {
                 print("gameStep: placing")
             case .randomizing:
                 print("gameStep: randomizing")
-                //play sound
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                //play slot machine sound
                     if self.gameMode == .arcade{
                         self.randomizeColors()
                     }
                     if self.gameMode == .classic {
                         self.randomizeNumber()
                     }
-//                }
             }
         }
     }
@@ -73,10 +71,25 @@ class GameViewModel: ObservableObject {
     @Published var number: Double = 0
     
     func randomizeNumber() {
-        self.number = .random(in: 0 ..< 100)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+        for i in 0...20 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(i)) {
+                withAnimation(.spring){
+                    self.number = .random(in: 0 ..< 100)
+                }
+                let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+                    impactMed.impactOccurred()
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            while self.slots.contains(where: { $0.value == Int(self.number)}){
+                print("duplicate randomizer")
+                self.number = .random(in: 0 ..< 100)
+
+            }
             self.gameStep = .placing
         }
+
     }
     // Items for color game mode
     var colorHues: [Double] = [0.00001, 0.07, 0.1 , 0.133,
@@ -90,14 +103,20 @@ class GameViewModel: ObservableObject {
     @Published var color: Double = 0
     
     func randomizeColors(){
-        self.color = .random(in: 0 ..< Double(self.totalColors))
-        
-        while self.slots.contains(where: { $0.value == Int(self.color)}){
-            print("duplicate randomizer")
-            self.color = .random(in: 0 ..< Double(self.totalColors))
-
+        for i in 0...22 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(i)) {
+                self.color = .random(in: 0 ..< Double(self.totalColors))    
+                let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+                    impactMed.impactOccurred()
+            }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            while self.slots.contains(where: { $0.value == Int(self.color)}){
+                print("duplicate randomizer")
+                self.color = .random(in: 0 ..< Double(self.totalColors))
+
+            }
             self.gameStep = .placing
         }
     }
@@ -149,7 +168,7 @@ class GameViewModel: ObservableObject {
             for i in 0...self.slotCount{
                 if let slot = self.slots[i] {
                     if slot >= last {
-                        print(slot, " is greater than ", last)
+//                        print(slot, " is greater than ", last)
                         last = slot
                         continue
                     }else{

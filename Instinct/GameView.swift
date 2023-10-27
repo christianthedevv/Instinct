@@ -71,18 +71,10 @@ struct GameView: View {
                                         Text("QUIT").font(.custom("Monda-Bold", size: 25)).foregroundStyle(.red)
                                     }.frame(width: 100, height: 65)
                         }
-                        if !gameVm.spinning {
-                                RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 3)
-                                .animatingColorBackground(for: gameVm.color)
-                                .frame(width: 150, height: 150)
-                            }
-                        if gameVm.spinning {
-                            RoundedRectangle(cornerRadius: 10)
-                            .stroke(.black, lineWidth: 3)
-                            .foregroundStyle(Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 1))
-                            .frame(width: 150, height: 150)
-                        }
+                        SplashView(animationType: .topToBottom, color: Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 1))
+                            .frame(width: 130, height: 130, alignment: .center)
+                            .cornerRadius(10)
+                            .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
                         }
                     }
 
@@ -134,11 +126,11 @@ struct GameView: View {
                 progress += 1
             }label: {
                 if gameVm.slots.contains(where: { $0.key == index}) {
-                    RoundedRectangle(cornerRadius: 20)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(gameVm.slots.contains(where: { $0.key == index}) ? Color(hue: gameVm.colorHues[gameVm.slots[index]!], saturation: 1, brightness: 1) : Color.clear)
                         .frame(height: 65)
                 }else{
-                    RoundedRectangle(cornerRadius: 20)
+                    RoundedRectangle(cornerRadius: 10)
                         .stroke(.black, lineWidth: 2)
                         .frame(height: 65)
                 }

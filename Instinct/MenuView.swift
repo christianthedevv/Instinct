@@ -12,9 +12,9 @@ struct MenuView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing:150) {
+            VStack(spacing: 50) {
 //                Spacer()
-                Text("INSTINCT").font(.custom("Monda-Regular", size: 45)).padding(.bottom, 150)
+                Text("INSTINCT").font(.custom("Monda-Regular", size: 45)).padding(.bottom, 130)
                 VStack(spacing:35){
                     Button {
                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
