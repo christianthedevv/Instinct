@@ -1,5 +1,5 @@
 //
-//  GameOverView.swift
+//  WinnerView.swift
 //  Instinct
 //
 //  Created by Christian Rodriguez on 10/23/23.
@@ -7,20 +7,15 @@
 
 import SwiftUI
 
-struct GameOverView: View {
+struct WinnerView: View {
     @EnvironmentObject var gameVm : GameViewModel
 
     var body: some View {
         ZStack{
             VStack(spacing: 75){
                 VStack(spacing:0){
-                    if gameVm.didWin {
-                        Text("CONGRATULATIONS").foregroundStyle(.black).font(.custom("Monda-Bold", size: 60))
-                        Text("YOU WIN!").foregroundStyle(.green).font(.custom("Monda-Regular", size: 58))
-                    }else{
-                        Text("GAME OVER").foregroundStyle(.black).font(.custom("Monda-Bold", size: 60))
-                        Text("YOU LOSE").foregroundStyle(.red).font(.custom("Monda-Regular", size: 45))
-                    }
+//                        Text("CONGRATULATIONS").foregroundStyle(.black).font(.custom("Monda-Bold", size: 60))
+                        Text("YOU WIN!").foregroundStyle(.green).font(.custom("Monda-Bold", size: 58))
                 }
                 HStack(spacing:35){
                     Button {
@@ -56,5 +51,5 @@ struct GameOverView: View {
 }
 
 #Preview {
-    GameOverView()
+    LoserView()
 }

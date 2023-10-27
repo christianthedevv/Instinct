@@ -18,8 +18,11 @@ struct ContentView: View {
             if gameVm.gameState == .start {
                 GameView()
             }
-            if gameVm.gameState == .over {
-                GameOverView()
+            if gameVm.gameState == .lose {
+                LoserView()
+            }
+            if gameVm.gameState == .win {
+                WinnerView()
             }
         }.environmentObject(gameVm)
     }

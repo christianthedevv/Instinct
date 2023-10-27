@@ -11,8 +11,7 @@ import AVFAudio
 struct GameView: View {
     @Namespace private var animation
     @EnvironmentObject var gameVm : GameViewModel
-    @State var progress = 0
-    
+
     var body: some View {
         if gameVm.gameMode == .classic {
             ZStack{
@@ -27,7 +26,7 @@ struct GameView: View {
                             let impactMed = UIImpactFeedbackGenerator(style: .rigid)
                                 impactMed.impactOccurred()
                             withAnimation {
-                                gameVm.gameState = .over
+                                gameVm.gameState = .lose
                             }
                         }label: {
                             RoundedRectangle(cornerRadius: 20)
@@ -38,7 +37,7 @@ struct GameView: View {
                         }
                             RoundedRectangle(cornerRadius: 20)
                                     .stroke(.black, lineWidth: 3)
-                            .frame(width: 150, height: 150)
+                            .frame(width: 130, height: 130)
                             .animatingNumberOverlay(for: gameVm.number)
                         }
                     }
@@ -62,7 +61,7 @@ struct GameView: View {
                             let impactMed = UIImpactFeedbackGenerator(style: .rigid)
                                 impactMed.impactOccurred()
                             withAnimation {
-                                gameVm.gameState = .over
+                                gameVm.gameState = .lose
                             }
                         }label: {
                             RoundedRectangle(cornerRadius: 20)
@@ -93,18 +92,18 @@ struct GameView: View {
             Button{
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                     impactMed.impactOccurred()
+                gameVm.audio.playAudio(soundName: String(gameVm.progress), fileType: "wav")
                 withAnimation {
                     gameVm.populateSlot(content: Int(gameVm.number), index: index)
                     gameVm.gameStep = .randomizing
                 }
-                print(gameVm.slots)
-                gameVm.playSounds(String(progress), fileExtension: ".wav")
-                progress += 1
+//                print(gameVm.slots)
+                gameVm.progress += 1
             }label: {
-                RoundedRectangle(cornerRadius: 20)
-                        .stroke(.black, lineWidth: 3)
+                RoundedRectangle(cornerRadius: 10)
+                        .stroke(.black, lineWidth: 2)
                         .overlay {
-                            Text(gameVm.slots.contains(where: { $0.key == index}) ? String(gameVm.slots[index]!) : "")
+                            Text(gameVm.slots.contains(where: { $0.key == index}) ? String(gameVm.slots[index]!) : "").font(.custom("Monda-Bold", size: 15))
                         }.frame(height: 65)
             }.disabled(gameVm.gameStep == .randomizing || gameVm.slots.contains(where: { $0.key == index}))
         }
@@ -117,24 +116,24 @@ struct GameView: View {
             Button{
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                     impactMed.impactOccurred()
+                gameVm.audio.playAudio(soundName: String(gameVm.progress), fileType: "wav")
                 withAnimation {
                     gameVm.populateSlot(content: Int(gameVm.color), index: index)
                     gameVm.gameStep = .randomizing
                 }
-                print(gameVm.slots)
-                gameVm.playSounds(String(progress), fileExtension: ".wav")
-                progress += 1
+//                print(gameVm.slots)
+                gameVm.progress += 1
             }label: {
-                if gameVm.slots.contains(where: { $0.key == index}) {
+                if isPopulated {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(gameVm.slots.contains(where: { $0.key == index}) ? Color(hue: gameVm.colorHues[gameVm.slots[index]!], saturation: 1, brightness: 1) : Color.clear)
+                        .fill(isPopulated ? Color(hue: gameVm.colorHues[gameVm.slots[index]!], saturation: 1, brightness: 1) : Color.clear)
                         .frame(height: 65)
                 }else{
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(.black, lineWidth: 2)
                         .frame(height: 65)
                 }
-            }.disabled(gameVm.gameStep == .randomizing || gameVm.slots.contains(where: { $0.key == index}))
+            }.disabled(gameVm.gameStep == .randomizing || isPopulated)
         }
     }
     

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import AVFAudio
 
 @MainActor
 class GameViewModel: ObservableObject {
@@ -17,17 +16,15 @@ class GameViewModel: ObservableObject {
             case .menu:
                 print("gameState: menu")
             case .start:
+                self.progress = 0
                 self.slots = [:]
                 print("gameState: start")
-            case .over:
-//                if didWin{
-//                    self.playSounds("youWin", fileExtension: ".m4a")
-//
-//                }else{
-//                    self.playSounds("gameOver", fileExtension: ".wav")
-//                }
-                self.playSounds("", fileExtension: "")
-                print("gameState: over")
+            case .win:
+                print("gameState: win")
+                self.audio.playAudio(soundName: "youWin", fileType: "m4a")
+            case .lose:
+                print("gameState: lose")
+                self.audio.playAudio(soundName: "gameOver", fileType: "wav")
             }
         }
     }
@@ -45,10 +42,11 @@ class GameViewModel: ObservableObject {
         didSet {
             switch gameStep {
             case .placing:
+//                self.audio.playAudio(soundName: "cutOff", fileType: "m4a")
                 print("gameStep: placing")
             case .randomizing:
                 print("gameStep: randomizing")
-                //play slot machine sound
+//                self.audio.playAudio(soundName: "wheelSpin", fileType: "m4a")
                     if self.gameMode == .arcade{
                         self.randomizeColors()
                     }
@@ -58,10 +56,9 @@ class GameViewModel: ObservableObject {
             }
         }
     }
-    @Published var spinning: Bool = false
     
-    //Audio Shit
-    @Published var audioPlayer: AVAudioPlayer!
+    @Published var audio: SoundEffectManager = SoundEffectManager()
+    @Published var progress = 0
     
     // Dictionary that gets populated by user
     @Published var slots : [Int:Int] = [:]
@@ -71,7 +68,7 @@ class GameViewModel: ObservableObject {
     @Published var number: Double = 0
     
     func randomizeNumber() {
-        for i in 0...20 {
+        for i in 0...16 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(i)) {
                 withAnimation(.spring){
                     self.number = .random(in: 0 ..< 100)
@@ -81,7 +78,7 @@ class GameViewModel: ObservableObject {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             while self.slots.contains(where: { $0.value == Int(self.number)}){
                 print("duplicate randomizer")
                 self.number = .random(in: 0 ..< 100)
@@ -97,13 +94,11 @@ class GameViewModel: ObservableObject {
                                0.33, 0.430, 0.465, 0.5,
                                0.53, 0.55, 0.6, 0.7,
                                0.74, 0.76, 0.8, 0.835, 0.9]
-
     @Published var totalColors = 21
-    
     @Published var color: Double = 0
     
     func randomizeColors(){
-        for i in 0...22 {
+        for i in 0...20 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(i)) {
                 self.color = .random(in: 0 ..< Double(self.totalColors))    
                 let impactMed = UIImpactFeedbackGenerator(style: .rigid)
@@ -111,7 +106,7 @@ class GameViewModel: ObservableObject {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.3) {
             while self.slots.contains(where: { $0.value == Int(self.color)}){
                 print("duplicate randomizer")
                 self.color = .random(in: 0 ..< Double(self.totalColors))
@@ -121,7 +116,6 @@ class GameViewModel: ObservableObject {
         }
     }
     
-    @Published var didWin = false
     
     func populateSlot(content: Int, index: Int){
         self.slots[index] = content
@@ -129,36 +123,48 @@ class GameViewModel: ObservableObject {
     }
     
     
+    
     func assessSlots(content: Int, index: Int){
         // LHS Check
+        var LHS = false
         for i in 0...index{
             if let slot = self.slots[i] {
                 if slot > content {
                     print("Game Over")
+                    LHS = false
                     withAnimation {
-                        self.gameState = .over
+                        self.gameState = .lose
                     }
                 }else{
+                    LHS = true
                     print("Game Continue")
                     self.finalAssessment()
                 }
             }
         }
 //        RHS Check
+        var RHS = false
         for i in index...self.slotCount{
             if let slot = self.slots[i] {
                 if slot < content {
                     print("Game Over")
+                    RHS = false
                     withAnimation {
-                        self.gameState = .over
-                        self.didWin = false
+                        self.gameState = .lose
                     }
                 }else{
+                    RHS = true
                     print("Game Continue")
                     self.finalAssessment()
                 }
             }
         }
+//        if RHS && LHS {
+//            self.audio.playAudio(soundName: String(self.progress), fileType: "wav")
+//        }
+//        if !RHS || !LHS {
+//            self.audio.playAudio(soundName: "gameOver", fileType: "wav")
+//        }
 
     }
     
@@ -173,59 +179,27 @@ class GameViewModel: ObservableObject {
                         continue
                     }else{
                         withAnimation{
-                            self.didWin = false
-                            self.gameState = .over
+                            self.gameState = .lose
                         }
                         return
                     }
                 }
             }
             withAnimation{
-                self.didWin = true
-                self.gameState = .over
+
+                self.gameState = .win
             }
         }else{
             return
         }
     }
     
-    func playSounds(_ soundFileName : String, fileExtension: String) {
-        if self.gameState == .over && didWin {
-            if let soundURL = Bundle.main.url(forResource: "youWin", withExtension: ".m4a"){
-                do {
-                    audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                    audioPlayer.play()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        if self.gameState == .over && !didWin {
-            if let soundURL = Bundle.main.url(forResource: "gameOver", withExtension: ".wav"){
-                do {
-                    audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                    audioPlayer.play()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }else{
-            // Have a toggle to mute sound in app
-            if let soundURL = Bundle.main.url(forResource: soundFileName, withExtension: fileExtension){
-                do {
-                    audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                    audioPlayer.play()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
 }
 enum GameState {
     case menu
     case start
-    case over
+    case lose
+    case win
 }
 enum GameMode {
     case classic
