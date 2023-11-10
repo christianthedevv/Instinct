@@ -79,6 +79,7 @@ struct GameView: View {
 
             }.onAppear(perform: {
                 withAnimation {
+                    // test
                     gameVm.gameStep = .randomizing
                 }
             })
