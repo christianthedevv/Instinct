@@ -89,7 +89,9 @@ class GameViewModel: ObservableObject {
                 self.number = .random(in: 0 ..< 100)
 
             }
-            self.gameStep = .placing
+            withAnimation{
+                self.gameStep = .placing
+            }
         }
 
     }
@@ -117,7 +119,9 @@ class GameViewModel: ObservableObject {
                 self.color = .random(in: 0 ..< Double(self.totalColors))
 
             }
-            self.gameStep = .placing
+            withAnimation{
+                self.gameStep = .placing
+            }
         }
     }
     
