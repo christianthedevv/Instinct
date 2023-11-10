@@ -140,5 +140,5 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView()
+    GameView().environmentObject(GameViewModel())
 }

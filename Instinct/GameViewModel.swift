@@ -56,7 +56,12 @@ class GameViewModel: ObservableObject {
             }
         }
     }
-    
+    // User Settings
+    @Published var timerMode: Bool = false
+    @Published var haptics: Bool = true
+    @Published var soundEffects: Bool = true
+
+    // Other??
     @Published var audio: SoundEffectManager = SoundEffectManager()
     @Published var progress = 0
     
@@ -73,7 +78,7 @@ class GameViewModel: ObservableObject {
                 withAnimation(.spring){
                     self.number = .random(in: 0 ..< 100)
                 }
-                let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+                let impactMed = UIImpactFeedbackGenerator(style: .soft)
                     impactMed.impactOccurred()
             }
         }
@@ -101,7 +106,7 @@ class GameViewModel: ObservableObject {
         for i in 0...20 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(i)) {
                 self.color = .random(in: 0 ..< Double(self.totalColors))    
-                let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+                let impactMed = UIImpactFeedbackGenerator(style: .soft)
                     impactMed.impactOccurred()
             }
         }
