@@ -12,17 +12,15 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            if gameVm.gameState == .menu {
-                MenuView()
-            }
-            if gameVm.gameState == .start {
-                GameView()
-            }
-            if gameVm.gameState == .lose {
-                LoserView()
-            }
-            if gameVm.gameState == .win {
-                WinnerView()
+            switch gameVm.gameState {
+                case .lose:
+                    LoserView()
+                case .win:
+                    WinnerView()
+                case .menu:
+                    MenuView()
+                case .start:
+                    GameView()
             }
         }.environmentObject(gameVm)
     }
