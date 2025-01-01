@@ -13,6 +13,9 @@
 		3652A86D2AEC0FDC00317B7C /* WinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3652A86C2AEC0FDC00317B7C /* WinnerView.swift */; };
 		3652A8712AEC177D00317B7C /* wheelSpin.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3652A8702AEC177D00317B7C /* wheelSpin.m4a */; };
 		3652A8732AEC17E000317B7C /* cutOff.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3652A8722AEC17E000317B7C /* cutOff.m4a */; };
+		36C6509E2D25BC8100D5668D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6509D2D25BC7E00D5668D /* LottieView.swift */; };
+		36C650A12D25BCFB00D5668D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 36C650A02D25BCFB00D5668D /* Lottie */; };
+		36C650A32D25C13F00D5668D /* instinctlaunch.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C650A22D25C13F00D5668D /* instinctlaunch.json */; };
 		36CB32432AE6A03600ECE46C /* InstinctApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB32422AE6A03600ECE46C /* InstinctApp.swift */; };
 		36CB32452AE6A03600ECE46C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB32442AE6A03600ECE46C /* ContentView.swift */; };
 		36CB32472AE6A03700ECE46C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36CB32462AE6A03700ECE46C /* Assets.xcassets */; };
@@ -54,6 +57,8 @@
 		3652A86C2AEC0FDC00317B7C /* WinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerView.swift; sourceTree = "<group>"; };
 		3652A8702AEC177D00317B7C /* wheelSpin.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = wheelSpin.m4a; sourceTree = "<group>"; };
 		3652A8722AEC17E000317B7C /* cutOff.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutOff.m4a; sourceTree = "<group>"; };
+		36C6509D2D25BC7E00D5668D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		36C650A22D25C13F00D5668D /* instinctlaunch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = instinctlaunch.json; sourceTree = "<group>"; };
 		36CB323F2AE6A03600ECE46C /* Instinct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instinct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CB32422AE6A03600ECE46C /* InstinctApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstinctApp.swift; sourceTree = "<group>"; };
 		36CB32442AE6A03600ECE46C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,6 +100,7 @@
 				36D7B6572AE89D7F0046F6CF /* FLAnimatedImage in Frameworks */,
 				36D7B6492AE8975D0046F6CF /* FLAnimatedImage in Frameworks */,
 				36D7B6552AE89D500046F6CF /* FLAnimatedImage in Frameworks */,
+				36C650A12D25BCFB00D5668D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,8 +145,10 @@
 				36CB32522AE6A11900ECE46C /* GameViewModel.swift */,
 				3652A8632AEBF7D500317B7C /* Randomizer */,
 				36D7B6502AE89C7C0046F6CF /* gifStuff.swift */,
+				36C6509D2D25BC7E00D5668D /* LottieView.swift */,
 				36D7B61B2AE6EA800046F6CF /* SoundEffects */,
 				36CB32582AE6AC8200ECE46C /* AnimatableNumberModifier.swift */,
+				36C650A22D25C13F00D5668D /* instinctlaunch.json */,
 				36D7B6522AE89D050046F6CF /* launchScreen.gif */,
 				36D7B6332AE6EEB70046F6CF /* Fonts */,
 				36CB32462AE6A03700ECE46C /* Assets.xcassets */,
@@ -220,6 +228,7 @@
 				36D7B6482AE8975D0046F6CF /* FLAnimatedImage */,
 				36D7B6542AE89D500046F6CF /* FLAnimatedImage */,
 				36D7B6562AE89D7F0046F6CF /* FLAnimatedImage */,
+				36C650A02D25BCFB00D5668D /* Lottie */,
 			);
 			productName = Instinct;
 			productReference = 36CB323F2AE6A03600ECE46C /* Instinct.app */;
@@ -251,6 +260,7 @@
 			mainGroup = 36CB32362AE6A03600ECE46C;
 			packageReferences = (
 				36D7B6472AE8975D0046F6CF /* XCRemoteSwiftPackageReference "FLAnimatedImage" */,
+				36C6509F2D25BCFB00D5668D /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 36CB32402AE6A03600ECE46C /* Products */;
 			projectDirPath = "";
@@ -284,6 +294,7 @@
 				36D7B6532AE89D050046F6CF /* launchScreen.gif in Resources */,
 				36D7B6382AE6F1030046F6CF /* Monda-Regular.ttf in Resources */,
 				36D7B62A2AE6EAAC0046F6CF /* 5.wav in Resources */,
+				36C650A32D25C13F00D5668D /* instinctlaunch.json in Resources */,
 				36D7B6202AE6EA9A0046F6CF /* 1.wav in Resources */,
 				36D7B6242AE6EAA20046F6CF /* 3.wav in Resources */,
 				36D7B63C2AE6F8300046F6CF /* game_over.ttf in Resources */,
@@ -307,6 +318,7 @@
 				36CB32552AE6A2F700ECE46C /* LoserView.swift in Sources */,
 				36CB32572AE6A30A00ECE46C /* MenuView.swift in Sources */,
 				36CB32532AE6A11900ECE46C /* GameViewModel.swift in Sources */,
+				36C6509E2D25BC8100D5668D /* LottieView.swift in Sources */,
 				36CB32512AE6A0AC00ECE46C /* GameView.swift in Sources */,
 				36CB32452AE6A03600ECE46C /* ContentView.swift in Sources */,
 				36CB32432AE6A03600ECE46C /* InstinctApp.swift in Sources */,
@@ -532,6 +544,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		36C6509F2D25BCFB00D5668D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		36D7B6472AE8975D0046F6CF /* XCRemoteSwiftPackageReference "FLAnimatedImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Flipboard/FLAnimatedImage";
@@ -543,6 +563,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		36C650A02D25BCFB00D5668D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36C6509F2D25BCFB00D5668D /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		36D7B6482AE8975D0046F6CF /* FLAnimatedImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 36D7B6472AE8975D0046F6CF /* XCRemoteSwiftPackageReference "FLAnimatedImage" */;
