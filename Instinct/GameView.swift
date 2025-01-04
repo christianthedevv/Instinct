@@ -13,7 +13,21 @@ struct GameView: View {
     @EnvironmentObject var gameVm : GameViewModel
 
     var body: some View {
-        if gameVm.gameMode == .classic {
+        switch gameVm.gameMode {
+        case .arcade:
+            ZStack{
+                if gameVm.gameStep == .randomizing {
+                    RandomizerActiveView()
+                }
+                if gameVm.gameStep == .placing {
+                    PlacingActiveView()
+                }
+            }.onAppear(perform: {
+                withAnimation {
+                    gameVm.gameStep = .randomizing
+                }
+            })
+        case .classic:
             ZStack{
                 HStack(spacing: 50){
                     VStack{
@@ -48,91 +62,84 @@ struct GameView: View {
                 }
             })
         }
-        if gameVm.gameMode == .arcade {
-            ZStack{
-                if gameVm.gameStep == .randomizing {
-                    RandomizerActiveView()
-                }
-                if gameVm.gameStep == .placing {
-                    PlacingActiveView()
-                }
-            }.onAppear(perform: {
-                withAnimation {
-                    gameVm.gameStep = .randomizing
-                }
-            })
-        }
+
     }
     
     @ViewBuilder
     func RandomizerActiveView() -> some View {
-        HStack(spacing: 50){
+        VStack(spacing: 50){
             // slots
-            VStack{
-                ForEach(0..<gameVm.slotCount){ i in
-                    ArcadeSlot(index: i)
+            // Randomizer
+            SplashView(animationType: .topToBottom, color: Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 1))
+                .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.width * 0.35)
+                .cornerRadius(10)
+                .shadow(color: Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 0.5), radius: 1, x: -3, y: -3)
+                .matchedGeometryEffect(id: "Randomizer", in: animation)
+            VStack(spacing:0){
+                ScrollView{
+                    ForEach(0..<gameVm.slotCount){ i in
+                        ArcadeSlot(index: i)
+                    }
                 }
-            }.frame(width: 65).padding(.vertical)
+            }
                 .matchedGeometryEffect(id: "Slots", in: animation)
 
             
-            VStack(spacing: 25){
-                Button{
-                    let impactMed = UIImpactFeedbackGenerator(style: .rigid)
-                        impactMed.impactOccurred()
-                    withAnimation {
-                        gameVm.gameState = .lose
-                    }
-                }label: {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.red, lineWidth: 5)
-                            .overlay {
-                                Text("QUIT").font(.custom("Monda-Bold", size: 25)).foregroundStyle(.red)
-                            }.frame(width: 100, height: 65)
-                }
-                // Randomizer
-                SplashView(animationType: .topToBottom, color: Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 1))
-                    .frame(width: 130, height: 130, alignment: .center)
-                    .cornerRadius(10)
-                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
-                    .matchedGeometryEffect(id: "Randomizer", in: animation)
-                }
+//            VStack(spacing: 25){
+//                Button{
+//                    let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+//                        impactMed.impactOccurred()
+//                    withAnimation {
+//                        gameVm.gameState = .lose
+//                    }
+//                }label: {
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .stroke(.red, lineWidth: 5)
+//                            .overlay {
+//                                Text("QUIT").font(.custom("Monda-Bold", size: 25)).foregroundStyle(.red)
+//                            }.frame(width: 100, height: 65)
+//                }
+//
+//                }
             }
     }
     @ViewBuilder
     func PlacingActiveView() -> some View {
-        HStack(spacing: 50){
+        VStack(spacing: 50){
+            // Randomizer
+            SplashView(animationType: .topToBottom, color: Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 1))
+                .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.width * 0.35)
+                .cornerRadius(10)
+                .shadow(color: Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 0.5), radius: 1, x: -3, y: -3)
+                .matchedGeometryEffect(id: "Randomizer", in: animation)
             // slots
-            VStack{
-                ForEach(0..<gameVm.slotCount){ i in
-                    ArcadeSlot(index: i)
+            VStack(spacing:0){
+                ScrollView{
+                    ForEach(0..<gameVm.slotCount){ i in
+                        ArcadeSlot(index: i)
+                    }
                 }
                 
-            }.frame(width: 65).padding(.vertical)
+            }
                 .matchedGeometryEffect(id: "Slots", in: animation)
 
             
-            VStack(spacing: 25){
-                Button{
-                    let impactMed = UIImpactFeedbackGenerator(style: .rigid)
-                        impactMed.impactOccurred()
-                    withAnimation {
-                        gameVm.gameState = .lose
-                    }
-                }label: {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.red, lineWidth: 5)
-                            .overlay {
-                                Text("QUIT").font(.custom("Monda-Bold", size: 25)).foregroundStyle(.red)
-                            }.frame(width: 100, height: 65)
-                }
-                // Randomizer
-                SplashView(animationType: .topToBottom, color: Color(hue: gameVm.colorHues[Int(gameVm.color)], saturation: 1, brightness: 1))
-                    .frame(width: 130, height: 130, alignment: .center)
-                    .cornerRadius(10)
-                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
-                    .matchedGeometryEffect(id: "Randomizer", in: animation)
-                }
+//            VStack(spacing: 25){
+//                Button{
+//                    let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+//                        impactMed.impactOccurred()
+//                    withAnimation {
+//                        gameVm.gameState = .lose
+//                    }
+//                }label: {
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .stroke(.red, lineWidth: 5)
+//                            .overlay {
+//                                Text("QUIT").font(.custom("Monda-Bold", size: 25)).foregroundStyle(.red)
+//                            }.frame(width: 100, height: 65)
+//                }
+//               
+//                }
             }
     }
     
@@ -176,12 +183,18 @@ struct GameView: View {
                 gameVm.progress += 1
             }label: {
                 if isPopulated {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(isPopulated ? Color(hue: gameVm.colorHues[gameVm.slots[index]!], saturation: 1, brightness: 1) : Color.clear)
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundStyle(isPopulated ? Color(hue: gameVm.colorHues[gameVm.slots[index]!], saturation: 1, brightness: 1) : Color.clear)
+                        .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.width * 0.35)
+
+                        .shadow(color: Color(hue: gameVm.colorHues[gameVm.slots[index]!], saturation: 1, brightness: 0.5), radius: 1, x: -3, y: -3)
+
+
 //                        .frame(height: 65)
                 }else{
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 20)
                         .stroke(.black, lineWidth: 2)
+                        .frame(width: UIScreen.main.bounds.width * 0.35, height: UIScreen.main.bounds.width * 0.35)
 //                        .frame(height: 65)
                 }
             }.disabled(gameVm.gameStep == .randomizing || isPopulated)

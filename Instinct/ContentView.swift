@@ -12,26 +12,24 @@ struct ContentView: View {
     @State var launched: Bool = false
 
     var body: some View {
-        ZStack{
-            LottieView(animationFileName: "instinctlaunch", loopMode: .playOnce).scaleEffect(0.27).frame(width: UIScreen.main.bounds.width * 0.75,height: UIScreen.main.bounds.height / 2).onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                        withAnimation(.spring){
-                            launched = true
-                        }
-                    }
-                
+        NavigationView{
+            ZStack{
+                if gameVm.gameState == .menu {
+                    LaunchView(launched: $launched)
+                }
+                switch gameVm.gameState {
+                    case .lose:
+                        LoserView()
+                    case .win:
+                        WinnerView()
+                    case .menu:
+                    MenuView(launched: $launched)
+                    case .start:
+                        GameView()
+                }
             }
-            switch gameVm.gameState {
-                case .lose:
-                    LoserView()
-                case .win:
-                    WinnerView()
-                case .menu:
-                MenuView(launched: $launched)
-                case .start:
-                    GameView()
-            }
-        }.environmentObject(gameVm)
+        }
+        .environmentObject(gameVm)
     }
 }
 

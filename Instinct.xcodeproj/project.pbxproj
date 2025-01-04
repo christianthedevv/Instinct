@@ -16,6 +16,10 @@
 		36C6509E2D25BC8100D5668D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C6509D2D25BC7E00D5668D /* LottieView.swift */; };
 		36C650A12D25BCFB00D5668D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 36C650A02D25BCFB00D5668D /* Lottie */; };
 		36C650A32D25C13F00D5668D /* instinctlaunch.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C650A22D25C13F00D5668D /* instinctlaunch.json */; };
+		36C650A72D26248500D5668D /* PixelifySans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C650A52D26248500D5668D /* PixelifySans-SemiBold.ttf */; };
+		36C650A92D2624A600D5668D /* PixelifySans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C650A82D2624A600D5668D /* PixelifySans-Regular.ttf */; };
+		36C650AB2D262ED500D5668D /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C650AA2D262ED500D5668D /* LaunchView.swift */; };
+		36C650E82D27117500D5668D /* Tiny5-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C650E72D27117500D5668D /* Tiny5-Regular.ttf */; };
 		36CB32432AE6A03600ECE46C /* InstinctApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB32422AE6A03600ECE46C /* InstinctApp.swift */; };
 		36CB32452AE6A03600ECE46C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB32442AE6A03600ECE46C /* ContentView.swift */; };
 		36CB32472AE6A03700ECE46C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36CB32462AE6A03700ECE46C /* Assets.xcassets */; };
@@ -59,6 +63,10 @@
 		3652A8722AEC17E000317B7C /* cutOff.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutOff.m4a; sourceTree = "<group>"; };
 		36C6509D2D25BC7E00D5668D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		36C650A22D25C13F00D5668D /* instinctlaunch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = instinctlaunch.json; sourceTree = "<group>"; };
+		36C650A52D26248500D5668D /* PixelifySans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PixelifySans-SemiBold.ttf"; sourceTree = "<group>"; };
+		36C650A82D2624A600D5668D /* PixelifySans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PixelifySans-Regular.ttf"; sourceTree = "<group>"; };
+		36C650AA2D262ED500D5668D /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		36C650E72D27117500D5668D /* Tiny5-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tiny5-Regular.ttf"; sourceTree = "<group>"; };
 		36CB323F2AE6A03600ECE46C /* Instinct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instinct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CB32422AE6A03600ECE46C /* InstinctApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstinctApp.swift; sourceTree = "<group>"; };
 		36CB32442AE6A03600ECE46C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,6 +150,7 @@
 				36CB32502AE6A0AC00ECE46C /* GameView.swift */,
 				36CB32542AE6A2F700ECE46C /* LoserView.swift */,
 				3652A86C2AEC0FDC00317B7C /* WinnerView.swift */,
+				36C650AA2D262ED500D5668D /* LaunchView.swift */,
 				36CB32522AE6A11900ECE46C /* GameViewModel.swift */,
 				3652A8632AEBF7D500317B7C /* Randomizer */,
 				36D7B6502AE89C7C0046F6CF /* gifStuff.swift */,
@@ -198,7 +207,10 @@
 		36D7B6332AE6EEB70046F6CF /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				36C650E72D27117500D5668D /* Tiny5-Regular.ttf */,
 				36D7B6342AE6EEE30046F6CF /* TenorSans-Regular.ttf */,
+				36C650A82D2624A600D5668D /* PixelifySans-Regular.ttf */,
+				36C650A52D26248500D5668D /* PixelifySans-SemiBold.ttf */,
 				36D7B63B2AE6F8300046F6CF /* game_over.ttf */,
 				36D7B63D2AE6F8FF0046F6CF /* Emulogic-zrEw.ttf */,
 				36D7B63F2AE6F9660046F6CF /* PixelSans-Regular.ttf */,
@@ -286,6 +298,7 @@
 				36D7B6262AE6EAA20046F6CF /* 2.wav in Resources */,
 				36D7B6252AE6EAA20046F6CF /* 4.wav in Resources */,
 				36D7B61E2AE6EA940046F6CF /* 0.wav in Resources */,
+				36C650A92D2624A600D5668D /* PixelifySans-Regular.ttf in Resources */,
 				36CB324A2AE6A03700ECE46C /* Preview Assets.xcassets in Resources */,
 				3652A8732AEC17E000317B7C /* cutOff.m4a in Resources */,
 				36D7B6302AE6EAB30046F6CF /* 8.wav in Resources */,
@@ -294,8 +307,10 @@
 				36D7B6532AE89D050046F6CF /* launchScreen.gif in Resources */,
 				36D7B6382AE6F1030046F6CF /* Monda-Regular.ttf in Resources */,
 				36D7B62A2AE6EAAC0046F6CF /* 5.wav in Resources */,
+				36C650A72D26248500D5668D /* PixelifySans-SemiBold.ttf in Resources */,
 				36C650A32D25C13F00D5668D /* instinctlaunch.json in Resources */,
 				36D7B6202AE6EA9A0046F6CF /* 1.wav in Resources */,
+				36C650E82D27117500D5668D /* Tiny5-Regular.ttf in Resources */,
 				36D7B6242AE6EAA20046F6CF /* 3.wav in Resources */,
 				36D7B63C2AE6F8300046F6CF /* game_over.ttf in Resources */,
 				36D7B63E2AE6F8FF0046F6CF /* Emulogic-zrEw.ttf in Resources */,
@@ -313,6 +328,7 @@
 				3652A8652AEBF91C00317B7C /* SplashShape.swift in Sources */,
 				3652A86D2AEC0FDC00317B7C /* WinnerView.swift in Sources */,
 				3652A8672AEBF96100317B7C /* SplashView.swift in Sources */,
+				36C650AB2D262ED500D5668D /* LaunchView.swift in Sources */,
 				36CB32592AE6AC8200ECE46C /* AnimatableNumberModifier.swift in Sources */,
 				3652A86B2AEC090500317B7C /* SoundEffectManager.swift in Sources */,
 				36CB32552AE6A2F700ECE46C /* LoserView.swift in Sources */,

@@ -4,6 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Tiny5-Regular.ttf</string>
+		<string>PixelifySans-Regular.ttf</string>
+		<string>PixelifySans-SemiBold.ttf</string>
 		<string>TenorSans-Regular.ttf</string>
 		<string>PixelSans-Regular.ttf</string>
 		<string>Monda-Bold.ttf</string>
