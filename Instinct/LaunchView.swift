@@ -11,7 +11,7 @@ struct LaunchView: View {
     @Binding var launched : Bool
     
     @State var spelled: [launchBlock] = []
-    @State var goal: [launchBlock] = [.init(letter: "i", color: Color(hue: 0, saturation: 1, brightness: 1)), .init(letter: "N", color: Color(hue: 0.1, saturation: 1, brightness: 1)), .init(letter: "S", color: Color(hue: 0.15, saturation: 1, brightness: 1)), .init(letter: "T", color: Color(hue: 0.2, saturation: 1, brightness: 1)), .init(letter: "i", color: Color(hue: 0.3, saturation: 1, brightness: 1)), .init(letter: "N", color: Color(hue: 0.5, saturation: 1, brightness: 1)), .init(letter: "C", color: Color(hue: 0.7, saturation: 1, brightness: 1)), .init(letter: "T", color: Color(hue: 0.8, saturation: 1, brightness: 1))]
+    @State var goal: [launchBlock]
     @State private var animationStep: Int = 0
     @State private var timer: Timer?
     @State var hideColors: Bool = false
@@ -121,5 +121,5 @@ struct launchBlock {
 }
 
 #Preview {
-    LaunchView(launched: .constant(false))
+    LaunchView(launched: .constant(false), goal: [.init(letter: "i", color: Color(hue: 0, saturation: 1, brightness: 1)), .init(letter: "N", color: Color(hue: 0.1, saturation: 1, brightness: 1)), .init(letter: "S", color: Color(hue: 0.15, saturation: 1, brightness: 1)), .init(letter: "T", color: Color(hue: 0.2, saturation: 1, brightness: 1)), .init(letter: "i", color: Color(hue: 0.3, saturation: 1, brightness: 1)), .init(letter: "N", color: Color(hue: 0.5, saturation: 1, brightness: 1)), .init(letter: "C", color: Color(hue: 0.7, saturation: 1, brightness: 1)), .init(letter: "T", color: Color(hue: 0.8, saturation: 1, brightness: 1))])
 }

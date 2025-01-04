@@ -13,28 +13,7 @@ struct InstinctApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ZStack{
                 ContentView()
-//                if launch {
-//                    Color.white.ignoresSafeArea()
-//                    
-//                    VStack(spacing: 10){
-//                        GIFView(type: .name("launchScreen")).frame(width: 500, height: 700).onAppear {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 9.0) {
-//                                withAnimation(.spring)  {
-//                                    self.launch = false
-//                                }
-//                            }
-//                        }
-//
-//                        Text("tap to skip").font(.custom("Monda-Regular", size: 15)).foregroundStyle(.gray)
-//                    }.onTapGesture {
-//                        withAnimation(.spring) {
-//                            self.launch = false
-//                        }
-//                    }
-//                }
-            }
         }
     }
 }

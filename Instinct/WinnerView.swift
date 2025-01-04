@@ -9,28 +9,18 @@ import SwiftUI
 
 struct WinnerView: View {
     @EnvironmentObject var gameVm : GameViewModel
+    @AppStorage(PlayerConfigKeys.level) private var level: Int = 3
 
     var body: some View {
         ZStack{
+            RainfallConfettiView()
             VStack(spacing: 75){
                 VStack(spacing:0){
-//                        Text("CONGRATULATIONS").foregroundStyle(.black).font(.custom("Monda-Bold", size: 60))
-                        Text("YOU WIN!").foregroundStyle(.green).font(.custom("Monda-Bold", size: 58))
+                        Text("YOU WIN!").foregroundStyle(.green).font(.custom("Tiny5-Regular", size: 60))
+                        .shadow(color: .black, radius:0.2, x: -2, y: -2)
+
                 }
-                HStack(spacing:35){
-                    Button {
-                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                            impactMed.impactOccurred()
-                         withAnimation{
-                            gameVm.gameState = .menu
-                        }
-                    }label: {
-                        RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 3)
-                                .overlay {
-                                    Text("MENU").font(.custom("Monda-Regular", size: 25)).foregroundStyle(.teal)
-                                }.frame(width: 150, height: 65)
-                    }
+                VStack(spacing:35){
                     Button {
                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
                             impactMed.impactOccurred()
@@ -38,18 +28,119 @@ struct WinnerView: View {
                            gameVm.gameState = .start
                        }
                     }label: {
-                        RoundedRectangle(cornerRadius: 20)
-                                .stroke(.black, lineWidth: 3)
-                                .overlay {
-                                    Text("PLAY AGAIN").font(.custom("Monda-Regular", size: 20)).foregroundStyle(.teal)
-                                }.frame(width: 150, height: 65)
+                        Text("PLAY AGAIN")
+                            .font(.custom("Tiny5-Regular", size: 35))
+                            .foregroundStyle(.black)
+                            .shadow(color: .gray, radius:0.2, x: -1, y: -1)
+
+
+                    }
+                    Button {
+                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                            impactMed.impactOccurred()
+                         withAnimation{
+                            gameVm.gameState = .menu
+                        }
+                    }label: {
+                        Text("MENU")
+                            .font(.custom("Tiny5-Regular", size: 25))
+                            .foregroundStyle(.black)
+                            .shadow(color: .gray, radius:0.2, x: -1, y: -1)
+
+
                     }
                 }
-            }
+            }.onAppear {
+                gameVm.slotCount += 1
+                let playerConfig = loadPlayerConfig()
+        }
         }
     }
 }
 
 #Preview {
-    LoserView()
+    WinnerView()
+}
+
+import SwiftUI
+
+struct RainfallConfettiView: View {
+    @State private var confetti: [Confetti] = []
+    let confettiCount = 50
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                ForEach(confetti) { confetti in
+                    Rectangle()
+                        .fill(confetti.color.gradient)
+                        .frame(width: confetti.size, height: confetti.size)
+                        .position(confetti.position)
+//                        .rotationEffect(confetti.rotation)
+                        .animation(
+                            Animation.linear(duration: confetti.duration)
+                                .repeatForever(autoreverses: false),
+                            value: confetti.position
+                        )
+                        .animation(
+                            Animation.linear(duration: confetti.rotationDuration)
+                                .repeatForever(autoreverses: false),
+                            value: confetti.rotation
+                        )
+                }
+            }
+            .onAppear {
+                generateConfetti(in: geometry.size)
+            }
+        }
+        .ignoresSafeArea()
+    }
+
+    private func generateConfetti(in size: CGSize) {
+        confetti = (0..<confettiCount).map { _ in
+            let width = CGFloat.random(in: 10...15)
+            return Confetti(
+                id: UUID(),
+                color: Color.random,
+                size: width,
+                position: CGPoint(x: CGFloat.random(in: 0...size.width), y: -width),
+                destination: CGPoint(x: CGFloat.random(in: 0...size.width), y: size.height + width),
+                rotation: Angle(degrees: Double.random(in: 0...960)),
+                rotationTarget: Angle(degrees: Double.random(in: 720...1080)),
+                rotationDuration: Double.random(in: 2...4),
+                duration: Double.random(in: 2...4)
+            )
+        }
+
+        for index in confetti.indices {
+            withAnimation {
+                confetti[index].position = confetti[index].destination
+                confetti[index].rotation = confetti[index].rotationTarget
+            }
+        }
+    }
+}
+
+struct Confetti: Identifiable {
+    let id: UUID
+    let color: Color
+    let size: CGFloat
+    var position: CGPoint
+    let destination: CGPoint
+    var rotation: Angle
+    let rotationTarget: Angle
+    let rotationDuration: Double
+    let duration: Double
+}
+
+extension Color {
+    static var random: Color {
+        Color(hue: Double.random(in: 0...1), saturation: 0.8, brightness: 0.9)
+    }
+}
+
+struct RainfallConfettiView_Previews: PreviewProvider {
+    static var previews: some View {
+        RainfallConfettiView()
+    }
 }

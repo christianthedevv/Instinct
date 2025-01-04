@@ -67,7 +67,7 @@ class GameViewModel: ObservableObject {
     
     // Dictionary that gets populated by user
     @Published var slots : [Int:Int] = [:]
-    @Published var slotCount = 10
+    @Published var slotCount = 3
     
     // Items for number game mode
     @Published var number: Double = 0
@@ -119,7 +119,7 @@ class GameViewModel: ObservableObject {
                 self.color = .random(in: 0 ..< Double(self.totalColors))
 
             }
-            withAnimation{
+            withAnimation(.interactiveSpring){
                 self.gameStep = .placing
             }
         }
@@ -217,4 +217,28 @@ enum GameMode {
 enum GameStep {
     case randomizing
     case placing
+}
+
+import Foundation
+
+struct PlayerConfigKeys {
+    static let level = "PlayerConfigLevel"
+    static let saturation = "PlayerConfigSaturation"
+    static let soundEffects = "PlayerConfigSoundEffects"
+}
+
+func savePlayerConfig(level: Int, saturation: Double, soundEffects: Bool) {
+    let defaults = UserDefaults.standard
+    defaults.set(level, forKey: PlayerConfigKeys.level)
+    defaults.set(saturation, forKey: PlayerConfigKeys.saturation)
+    defaults.set(soundEffects, forKey: PlayerConfigKeys.soundEffects)
+}
+
+func loadPlayerConfig() -> (level: Int, saturation: Double, soundEffects: Bool) {
+    let defaults = UserDefaults.standard
+    let level = defaults.integer(forKey: PlayerConfigKeys.level) // Default is 0 if not set
+    let saturation = defaults.double(forKey: PlayerConfigKeys.saturation) // Default is 0.0 if not set
+    let soundEffects = defaults.bool(forKey: PlayerConfigKeys.soundEffects) // Default is false if not set
+    
+    return (level: level != 0 ? level : 3, saturation: saturation != 0 ? saturation : 1.0, soundEffects: soundEffects)
 }
