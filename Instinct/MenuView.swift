@@ -174,29 +174,53 @@ struct MenuView: View {
             VStack{
                 // preference settings
                 Form(content: {
-                    VStack {
-                        HStack(spacing:0){
-                            ForEach([0.0, 0.1, 0.15 ,0.2, 0.25, 0.3, 0.4, 0.5, 0.6,0.8], id:\.self){ i in
-                                Rectangle()
-                                    .foregroundStyle(Color(hue: i, saturation: saturation, brightness: 1))
-                                    .frame(width: UIScreen.main.bounds.width * 0.05, height: UIScreen.main.bounds.width * 0.05)
+                    
+                    Section{
+                        VStack {
+                            HStack(spacing:0){
+                                ForEach([0.0, 0.1, 0.15 ,0.2, 0.25, 0.3, 0.4, 0.5, 0.6,0.8], id:\.self){ i in
+                                    Rectangle()
+                                        .foregroundStyle(Color(hue: i, saturation: saturation, brightness: 1))
+                                        .frame(width: UIScreen.main.bounds.width * 0.05, height: UIScreen.main.bounds.width * 0.05)
 
-//                                    .shadow(color: Color(hue: i, saturation: saturation, brightness: 0.5), radius: 1, x: 0, y: -3)
+    //                                    .shadow(color: Color(hue: i, saturation: saturation, brightness: 0.5), radius: 1, x: 0, y: -3)
+                                }
+                            }
+                            .padding(.leading, 3)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .frame(width: UIScreen.main.bounds.width * 0.1)
+                            Slider(value: $saturation, in: 0.2...1.5, step: 0.01)
+                                        .padding()
+                                        .tint(Color(hue: 0, saturation: saturation, brightness: 1))
+                                }
+                        ScrollView(.horizontal){
+                        HStack{
+                                ForEach(["AppIcon", "AppIcon 1","AppIcon 2","AppIcon 3","AppIcon 4","AppIcon 5"], id:\.self){icon in
+                                    Button{
+                                        changeAppIcon(to: icon)
+                                    }label:{
+                                        Image(icon).resizable().frame(width: 60, height: 60).cornerRadius(10)
+                                    }.buttonStyle(.borderless)
+                                }
                             }
                         }
-                        .padding(.leading, 3)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                        .frame(width: UIScreen.main.bounds.width * 0.1)
-                        Slider(value: $saturation, in: 0.2...1.5, step: 0.01)
-                                    .padding()
-                                    .tint(Color(hue: 0, saturation: saturation, brightness: 1))
-                            }
-                    Toggle(isOn: $haptics, label: {
-                        Text("Haptics")
-                    })
-                    Toggle(isOn: $soundEffects, label: {
-                        Text("Sound Effects")
-                    })
+                        
+                    }header: {
+                        Text("App Appearance").font(.custom("Tiny5-Regular", size: 20)).foregroundStyle(.gray)
+
+                    }
+                    
+                    Section{
+                        Toggle(isOn: $haptics, label: {
+                            Text("Haptics")
+                        })
+                        Toggle(isOn: $soundEffects, label: {
+                            Text("Sound Effects")
+                        })
+                    }header: {
+                        Text("Game Settings").font(.custom("Tiny5-Regular", size: 20)).foregroundStyle(.gray)
+
+                    }
 //                    Toggle(isOn: $gameVm.timerMode, label: {
 //                        Text("Timer Mode")
 //                    })
@@ -205,6 +229,16 @@ struct MenuView: View {
         })
     }
 }
+
+private func changeAppIcon(to iconName: String) {
+        UIApplication.shared.setAlternateIconName(iconName) { error in
+            if let error = error {
+                print("Error setting alternate icon \(error.localizedDescription)")
+            }
+
+        }
+    }
+
 
 #Preview {
     MenuView(launched: .constant(true)).environmentObject(GameViewModel())
