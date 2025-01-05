@@ -9,8 +9,10 @@ import SwiftUI
 
 struct WinnerView: View {
     @EnvironmentObject var gameVm : GameViewModel
+    @AppStorage(PlayerConfigKeys.saturation) private var saturation: Double = 1.0
+    @AppStorage(PlayerConfigKeys.soundEffects) private var soundEffects: Bool = true
     @AppStorage(PlayerConfigKeys.level) private var level: Int = 3
-
+    @AppStorage(PlayerConfigKeys.haptics) private var haptics: Bool = true
     var body: some View {
         ZStack{
             RainfallConfettiView()
@@ -22,8 +24,10 @@ struct WinnerView: View {
                 }
                 VStack(spacing:35){
                     Button {
-                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                            impactMed.impactOccurred()
+                        if haptics{
+                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                                impactMed.impactOccurred()
+                        }
                         withAnimation{
                            gameVm.gameState = .start
                        }
@@ -32,12 +36,17 @@ struct WinnerView: View {
                             .font(.custom("Tiny5-Regular", size: 35))
                             .foregroundStyle(.black)
                             .shadow(color: .gray, radius:0.2, x: -1, y: -1)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 3)
+                            .background(RoundedRectangle(cornerRadius: 10).stroke( .black, lineWidth: 2))
 
 
                     }
                     Button {
-                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                            impactMed.impactOccurred()
+                        if haptics{
+                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                                impactMed.impactOccurred()
+                        }
                          withAnimation{
                             gameVm.gameState = .menu
                         }
@@ -46,13 +55,13 @@ struct WinnerView: View {
                             .font(.custom("Tiny5-Regular", size: 25))
                             .foregroundStyle(.black)
                             .shadow(color: .gray, radius:0.2, x: -1, y: -1)
+                        
 
 
                     }
                 }
             }.onAppear {
-                gameVm.slotCount += 1
-                let playerConfig = loadPlayerConfig()
+                level += 1
         }
         }
     }

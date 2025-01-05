@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		364485452D2A2A96006FD64B /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364485442D2A2A96006FD64B /* InfoView.swift */; };
 		3652A8652AEBF91C00317B7C /* SplashShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3652A8642AEBF91C00317B7C /* SplashShape.swift */; };
 		3652A8672AEBF96100317B7C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3652A8662AEBF96100317B7C /* SplashView.swift */; };
 		3652A86B2AEC090500317B7C /* SoundEffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3652A86A2AEC090500317B7C /* SoundEffectManager.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		364485442D2A2A96006FD64B /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		3652A8642AEBF91C00317B7C /* SplashShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashShape.swift; sourceTree = "<group>"; };
 		3652A8662AEBF96100317B7C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		3652A86A2AEC090500317B7C /* SoundEffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffectManager.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				36CB32562AE6A30A00ECE46C /* MenuView.swift */,
 				36CB32502AE6A0AC00ECE46C /* GameView.swift */,
 				36CB32542AE6A2F700ECE46C /* LoserView.swift */,
+				364485442D2A2A96006FD64B /* InfoView.swift */,
 				3652A86C2AEC0FDC00317B7C /* WinnerView.swift */,
 				36C650AA2D262ED500D5668D /* LaunchView.swift */,
 				36CB32522AE6A11900ECE46C /* GameViewModel.swift */,
@@ -304,6 +307,7 @@
 				3652A8672AEBF96100317B7C /* SplashView.swift in Sources */,
 				36C650AB2D262ED500D5668D /* LaunchView.swift in Sources */,
 				36CB32592AE6AC8200ECE46C /* AnimatableNumberModifier.swift in Sources */,
+				364485452D2A2A96006FD64B /* InfoView.swift in Sources */,
 				3652A86B2AEC090500317B7C /* SoundEffectManager.swift in Sources */,
 				36CB32552AE6A2F700ECE46C /* LoserView.swift in Sources */,
 				36CB32572AE6A30A00ECE46C /* MenuView.swift in Sources */,

@@ -13,7 +13,11 @@ import SwiftUI
 import AVFoundation
 
 class SoundEffectManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
-
+    @AppStorage(PlayerConfigKeys.saturation) private var saturation: Double = 1.0
+    @AppStorage(PlayerConfigKeys.soundEffects) private var soundEffects: Bool = true
+    @AppStorage(PlayerConfigKeys.level) private var level: Int = 3
+    @AppStorage(PlayerConfigKeys.haptics) private var haptics: Bool = true
+    
     @Published var isPlaying: Bool = false {
         willSet {
             if newValue == true {
@@ -43,24 +47,26 @@ class SoundEffectManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
 
     func playAudio(soundName: String, fileType: String) {
-        try! AVAudioSession.sharedInstance().setCategory(
-            AVAudioSession.Category.playback,
-            mode: AVAudioSession.Mode.default,
-            options: [
-                AVAudioSession.CategoryOptions.mixWithOthers
-            ]
-        )
-        try! AVAudioSession.sharedInstance().setActive(true)
-        let path = Bundle.main.path(forResource: soundName, ofType:fileType)
-        let url = URL(fileURLWithPath: path ?? "gameOver.wav")
-        print("Playing Sound: ", soundName)
+        if self.soundEffects{
+            try! AVAudioSession.sharedInstance().setCategory(
+                AVAudioSession.Category.playback,
+                mode: AVAudioSession.Mode.default,
+                options: [
+                    AVAudioSession.CategoryOptions.mixWithOthers
+                ]
+            )
+            try! AVAudioSession.sharedInstance().setActive(true)
+            let path = Bundle.main.path(forResource: soundName, ofType:fileType)
+            let url = URL(fileURLWithPath: path ?? "gameOver.wav")
+            print("Playing Sound: ", soundName)
 
-        do {
-            myAudioPlayer = try AVAudioPlayer(contentsOf: url)
-            myAudioPlayer.delegate = self
-            myAudioPlayer.play()
-        } catch {
-            // couldn't load file :(
+            do {
+                myAudioPlayer = try AVAudioPlayer(contentsOf: url)
+                myAudioPlayer.delegate = self
+                myAudioPlayer.play()
+            } catch {
+                // couldn't load file :(
+            }
         }
     }
 

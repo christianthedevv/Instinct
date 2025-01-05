@@ -51,23 +51,22 @@ class GameViewModel: ObservableObject {
                         self.randomizeColors()
                     }
                     if self.gameMode == .classic {
-                        self.randomizeNumber()
+                        self.randomizeColors()
                     }
             }
         }
     }
     // User Settings
-    @Published var timerMode: Bool = false
-    @Published var haptics: Bool = true
-    @Published var soundEffects: Bool = true
-
+    @AppStorage(PlayerConfigKeys.saturation) private var saturation: Double = 1.0
+    @AppStorage(PlayerConfigKeys.soundEffects) private var soundEffects: Bool = true
+    @AppStorage(PlayerConfigKeys.level) private var level: Int = 3
+    @AppStorage(PlayerConfigKeys.haptics) private var haptics: Bool = true
     // Other??
     @Published var audio: SoundEffectManager = SoundEffectManager()
     @Published var progress = 0
     
     // Dictionary that gets populated by user
     @Published var slots : [Int:Int] = [:]
-    @Published var slotCount = 3
     
     // Items for number game mode
     @Published var number: Double = 0
@@ -78,8 +77,10 @@ class GameViewModel: ObservableObject {
                 withAnimation(.spring){
                     self.number = .random(in: 0 ..< 100)
                 }
-                let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                    impactMed.impactOccurred()
+                if self.haptics{
+                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                        impactMed.impactOccurred()
+                }
             }
         }
         
@@ -108,8 +109,10 @@ class GameViewModel: ObservableObject {
         for i in 0...20 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(i)) {
                 self.color = .random(in: 0 ..< Double(self.totalColors))    
-                let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                    impactMed.impactOccurred()
+                if self.haptics{
+                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                        impactMed.impactOccurred()
+                }
             }
         }
         
@@ -153,7 +156,7 @@ class GameViewModel: ObservableObject {
         }
 //        RHS Check
         var RHS = false
-        for i in index...self.slotCount{
+        for i in index...(self.gameMode == .classic ? 10 : self.level){
             if let slot = self.slots[i] {
                 if slot < content {
                     print("Game Over")
@@ -179,8 +182,8 @@ class GameViewModel: ObservableObject {
     
     func finalAssessment(){
         var last = 0
-        if self.slots.count == self.slotCount {
-            for i in 0...self.slotCount{
+        if self.slots.count == (self.gameMode == .classic ? 10 : self.level) {
+            for i in 0...(self.gameMode == .classic ? 10 : self.level){
                 if let slot = self.slots[i] {
                     if slot >= last {
 //                        print(slot, " is greater than ", last)
@@ -225,6 +228,8 @@ struct PlayerConfigKeys {
     static let level = "PlayerConfigLevel"
     static let saturation = "PlayerConfigSaturation"
     static let soundEffects = "PlayerConfigSoundEffects"
+    static let haptics = "PlayerConfigHaptics"
+
 }
 
 func savePlayerConfig(level: Int, saturation: Double, soundEffects: Bool) {

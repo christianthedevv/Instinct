@@ -11,6 +11,7 @@ struct MenuView: View {
     @AppStorage(PlayerConfigKeys.saturation) private var saturation: Double = 1.0
     @AppStorage(PlayerConfigKeys.soundEffects) private var soundEffects: Bool = true
     @AppStorage(PlayerConfigKeys.level) private var level: Int = 3
+    @AppStorage(PlayerConfigKeys.haptics) private var haptics:  Bool = true
 
 
     @EnvironmentObject var gameVm : GameViewModel
@@ -27,15 +28,20 @@ struct MenuView: View {
                         Button{
                             info.toggle()
                         }label: {
-                            Text("i").font(.custom("Tiny5-Regular", size: 40))
+                            Text("i").font(.custom("Tiny5-Regular", size: 35))
                                 .foregroundStyle(.black).padding(.horizontal, 30)
 
+                        }.sheet(isPresented: $info) {
+                            InfoView()
                         }
                     }
                     Spacer()
                     Button {
-                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                        impactMed.impactOccurred()
+                        if haptics {
+                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                            impactMed.impactOccurred()
+                        }
+                        
                         withAnimation {
                             gameVm.gameMode = .classic
                             gameVm.gameState = .start
@@ -109,8 +115,10 @@ struct MenuView: View {
 //                    }
                     
                     Button {
-                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                        impactMed.impactOccurred()
+                        if haptics{
+                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                            impactMed.impactOccurred()
+                        }
                         withAnimation {
                             gameVm.gameMode = .arcade
                             gameVm.gameState = .start
@@ -161,7 +169,6 @@ struct MenuView: View {
         .onAppear {
                 print("Level: \(level), saturation: \(saturation), Sound Effects: \(soundEffects)")
             
-            gameVm.slotCount = level
         }
         .sheet(isPresented: $settings , content: {
             VStack{
@@ -184,15 +191,15 @@ struct MenuView: View {
                                     .padding()
                                     .tint(Color(hue: 0, saturation: saturation, brightness: 1))
                             }
-                    Toggle(isOn: $gameVm.haptics, label: {
+                    Toggle(isOn: $haptics, label: {
                         Text("Haptics")
                     })
-                    Toggle(isOn: $gameVm.soundEffects, label: {
+                    Toggle(isOn: $soundEffects, label: {
                         Text("Sound Effects")
                     })
-                    Toggle(isOn: $gameVm.timerMode, label: {
-                        Text("Timer Mode")
-                    })
+//                    Toggle(isOn: $gameVm.timerMode, label: {
+//                        Text("Timer Mode")
+//                    })
                 })
             }.font(.custom("Monda-Regular", size: 20)).foregroundStyle(.black)
         })
