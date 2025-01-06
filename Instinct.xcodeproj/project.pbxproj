@@ -59,7 +59,6 @@
 		36C650A82D2624A600D5668D /* PixelifySans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PixelifySans-Regular.ttf"; sourceTree = "<group>"; };
 		36C650AA2D262ED500D5668D /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		36C650E72D27117500D5668D /* Tiny5-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tiny5-Regular.ttf"; sourceTree = "<group>"; };
-		36C651572D296B5100D5668D /* Instinct.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Instinct.entitlements; sourceTree = "<group>"; };
 		36CB323F2AE6A03600ECE46C /* Instinct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instinct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CB32422AE6A03600ECE46C /* InstinctApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstinctApp.swift; sourceTree = "<group>"; };
 		36CB32442AE6A03600ECE46C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,7 +130,6 @@
 		36CB32412AE6A03600ECE46C /* Instinct */ = {
 			isa = PBXGroup;
 			children = (
-				36C651572D296B5100D5668D /* Instinct.entitlements */,
 				36D7B6362AE6EEF90046F6CF /* Info.plist */,
 				36CB32422AE6A03600ECE46C /* InstinctApp.swift */,
 				36CB32442AE6A03600ECE46C /* ContentView.swift */,
@@ -455,7 +453,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Instinct/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Instinct;
+				INFOPLIST_KEY_CFBundleDisplayName = iNSTiNCT;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -475,7 +473,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -494,7 +492,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Instinct/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Instinct;
+				INFOPLIST_KEY_CFBundleDisplayName = iNSTiNCT;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -514,7 +512,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
