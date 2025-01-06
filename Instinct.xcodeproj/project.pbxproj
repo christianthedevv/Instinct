@@ -55,6 +55,7 @@
 		3652A86C2AEC0FDC00317B7C /* WinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerView.swift; sourceTree = "<group>"; };
 		3652A8702AEC177D00317B7C /* wheelSpin.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = wheelSpin.m4a; sourceTree = "<group>"; };
 		3652A8722AEC17E000317B7C /* cutOff.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutOff.m4a; sourceTree = "<group>"; };
+		36C39E822D2C33820052CD73 /* Instinct.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Instinct.entitlements; sourceTree = "<group>"; };
 		36C650A52D26248500D5668D /* PixelifySans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PixelifySans-SemiBold.ttf"; sourceTree = "<group>"; };
 		36C650A82D2624A600D5668D /* PixelifySans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PixelifySans-Regular.ttf"; sourceTree = "<group>"; };
 		36C650AA2D262ED500D5668D /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		36CB32412AE6A03600ECE46C /* Instinct */ = {
 			isa = PBXGroup;
 			children = (
+				36C39E822D2C33820052CD73 /* Instinct.entitlements */,
 				36D7B6362AE6EEF90046F6CF /* Info.plist */,
 				36CB32422AE6A03600ECE46C /* InstinctApp.swift */,
 				36CB32442AE6A03600ECE46C /* ContentView.swift */,
@@ -371,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -428,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -453,7 +455,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Instinct/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = iNSTiNCT;
+				INFOPLIST_KEY_CFBundleDisplayName = Instinct;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -492,7 +494,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Instinct/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = iNSTiNCT;
+				INFOPLIST_KEY_CFBundleDisplayName = Instinct;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
