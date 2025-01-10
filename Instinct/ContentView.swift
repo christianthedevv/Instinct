@@ -32,7 +32,9 @@ struct ContentView: View {
                         GameView()
                 }
             }
+            .background(Color.background)
         }
+        .background(Color.background)
         .environmentObject(gameVm)
     }
 }

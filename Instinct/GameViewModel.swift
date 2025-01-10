@@ -229,6 +229,7 @@ struct PlayerConfigKeys {
     static let saturation = "PlayerConfigSaturation"
     static let soundEffects = "PlayerConfigSoundEffects"
     static let haptics = "PlayerConfigHaptics"
+    static let onboarded = "PlayerOnboarded"
 
 }
 
