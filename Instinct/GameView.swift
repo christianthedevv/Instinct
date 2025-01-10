@@ -39,7 +39,9 @@ struct GameView: View {
                     Spacer()
 
                 }
-            }.onAppear(perform: {
+            }
+            .background(Color.background)
+            .onAppear(perform: {
                 withAnimation {
                     gameVm.gameStep = .randomizing
                 }

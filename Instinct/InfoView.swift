@@ -16,37 +16,37 @@ struct InfoView: View {
     var body: some View {
         VStack(alignment:.center){
             Text("HOW TO PLAY")
-                .font(.custom("Tiny5-Regular", size: 55)).foregroundStyle(.black)
-                .shadow(color:.gray ,radius: 0.2, x: -1, y: -1)
+                .font(.custom("Tiny5-Regular", size: 55)).foregroundStyle(.text)
+                .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1)
             Text("Trust your instincts and sort randomly generated colors.")
                 .font(.custom("Tiny5-Regular", size: 30)).foregroundStyle(.red)
-                .shadow(color:.black ,radius: 0.2, x: -1, y: -1)
+                .shadow(color:.text ,radius: 0.2, x: -1, y: -1)
                 .multilineTextAlignment(.center)
             VStack(alignment:.leading, spacing:12){
                 Text("1. One random color block is generated.")
-                    .foregroundStyle(.white)
-                    .shadow(color:.black ,radius: 0.2, x: -1, y: -1)
+                    .foregroundStyle(.text)
+                    .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1)
                 Text("2. Place the generated block into one of the available slots")
-                    .foregroundStyle(.white)
-                    .shadow(color:.black ,radius: 0.2, x: -1, y: -1)
+                    .foregroundStyle(.text)
+                    .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1)
                 Text("3. Successfully sort all colors into a rainbow sequence to win!")
-                    .foregroundStyle(.white)
-                    .shadow(color:.black ,radius: 0.2, x: -1, y: -1)
-            }.padding().background(.gray).cornerRadius(10)
+                    .foregroundStyle(.text)
+                    .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1)
+            }.padding().background(.text.opacity(0.3)).cornerRadius(10)
             HStack{
                 VStack(alignment:.leading){
                     Text("CLASSIC")
-                        .font(.custom("Tiny5-Regular", size: 40)).foregroundStyle(.black)
-                        .shadow(color:.gray ,radius: 0.2, x: -1, y: -1)
+                        .font(.custom("Tiny5-Regular", size: 40)).foregroundStyle(.text)
+                        .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1)
                     Text("Organize 10 random colors into a rainbow sequence")
-                        .foregroundStyle(.gray)
-                        .shadow(color:.black ,radius: 0.2, x: -1, y: -1).padding(.bottom)
+                        .foregroundStyle(.text)
+                        .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1).padding(.bottom)
                     Text("ARCADE")
-                        .font(.custom("Tiny5-Regular", size: 40)).foregroundStyle(.black)
-                        .shadow(color:.gray ,radius: 0.2, x: -1, y: -1)
+                        .font(.custom("Tiny5-Regular", size: 40)).foregroundStyle(.text)
+                        .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1)
                     Text("Starting from just 3 colors, each round increases by one.")
-                        .foregroundStyle(.gray)
-                        .shadow(color:.black ,radius: 0.2, x: -1, y: -1)
+                        .foregroundStyle(.text)
+                        .shadow(color:.inverseText ,radius: 0.2, x: -1, y: -1)
                 }
                 
                 VStack(spacing:0){
@@ -63,7 +63,7 @@ struct InfoView: View {
                 .frame(width: UIScreen.main.bounds.width * 0.1)
             }
             Spacer()
-        }.padding()
+        }.padding().background(Color.background.ignoresSafeArea())
     }
 }
 

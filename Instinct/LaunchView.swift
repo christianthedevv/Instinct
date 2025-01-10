@@ -23,6 +23,7 @@ struct LaunchView: View {
 
     var body: some View {
         ZStack{
+            Color.background.ignoresSafeArea()
             if !launched{
                     if !shift{
                         VStack(alignment:.center,spacing: 0) {
@@ -31,6 +32,7 @@ struct LaunchView: View {
                                 LaunchBlock(letter: letter)
                             }
                         }
+                        
                         .clipShape(RoundedRectangle(cornerRadius: 12))
 
                     }else{
@@ -56,6 +58,7 @@ struct LaunchView: View {
             }
             
         }
+        .background(Color.background)
         .onAppear {
             if !launched{
                 timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { _ in
@@ -104,8 +107,8 @@ struct LaunchView: View {
 
             Text(letter.letter)
                     .font(.custom("Tiny5-Regular", size:42))
-                    .foregroundStyle(hideColors ? .black : .white)
-                    .shadow(color: hideColors ? .white : .black, radius:1, x: -1, y: -1)
+                    .foregroundStyle(!shift ? .white : hideColors ? .text : .inverseText)
+                    .shadow(color: !shift ? .black : hideColors ? .inverseText : .text, radius:1, x: -1, y: -1)
 
                     
         }.matchedGeometryEffect(id: letter.id.uuidString, in: launchAnimation)
