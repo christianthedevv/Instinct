@@ -28,7 +28,7 @@ struct GameView: View {
                             info.toggle()
                         }label: {
                             Text("i").font(.custom("Tiny5-Regular", size: 35))
-                                .foregroundStyle(.black).padding(.horizontal, 30)
+                                .foregroundStyle(.text).padding(.horizontal, 30)
 
                         }.sheet(isPresented: $info) {
                             InfoView()
